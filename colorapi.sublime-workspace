@@ -1,0 +1,319 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"si",
+				"signedTxHex"
+			],
+			[
+				"sign",
+				"signTx"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"if",
+				"ife	if … else … end"
+			],
+			[
+				"buy",
+				"buy_request"
+			],
+			[
+				"exp",
+				"expected_funds"
+			],
+			[
+				"Pixel",
+				"PixelBuyer"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "broadcast.js",
+			"settings":
+			{
+				"buffer_size": 1441,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/cowboydan/projects/color-api"
+	],
+	"file_history":
+	[
+		"/home/cowboydan/projects/protocoluwiki/Table-of-Contents.md",
+		"/home/cowboydan/rails_projects/billboard/app/helpers/pixel_buyer.rb",
+		"/home/cowboydan/rails_projects/billboard/app/helpers/tx_listener.rb",
+		"/home/cowboydan/rails_projects/billboard/app/helpers/toshi/toshi.rb",
+		"/home/cowboydan/rails_projects/billboard/app/controllers/api/tx_controller.rb",
+		"/home/cowboydan/rails_projects/billboard/config/routes.rb",
+		"/home/cowboydan/rails_projects/billboard/app/helpers/pixel_buyer_helper.rb",
+		"/home/cowboydan/rails_projects/billboard/.env",
+		"/home/cowboydan/rails_projects/billboard/spec/helpers/pixel_buyer_helper_spec.rb",
+		"/home/cowboydan/rails_projects/billboard/spec/spec_helper.rb",
+		"/home/cowboydan/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/cowboydan/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/cowboydan/rails_projects/billboard/spec/helpers/pixel_buyer_spec.rb",
+		"/home/cowboydan/rails_projects/billboard/app/models/pixel.rb",
+		"/home/cowboydan/rails_projects/billboard/app/helpers/image_helper.rb",
+		"/home/cowboydan/rails_projects/billboard/app/workers/pixel_registrator.rb"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"signTx",
+			"sign",
+			"qr",
+			"create",
+			"clinets",
+			"smart",
+			"(Metadata#min",
+			"(Asset Metadata",
+			"sendrawtx",
+			"ApiPoster",
+			"ssl",
+			"status",
+			"amount",
+			"presta",
+			"bytes_per_inputs",
+			"prestaging_amounts",
+			"wrap",
+			"def download_file_from_s3_to_localfile",
+			".enq"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"(Metadata"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "broadcast.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1441,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 255.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 223.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "colorapi.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"b",
+				"Benefits.md"
+			],
+			[
+				"br",
+				"app/helpers/bitcoin_rpc.rb"
+			],
+			[
+				"toshi",
+				"app/helpers/toshi/toshi.rb"
+			],
+			[
+				"rou",
+				"config/routes.rb"
+			],
+			[
+				"pbhs",
+				"spec/helpers/pixel_buyer_helper_spec.rb"
+			],
+			[
+				"pb",
+				"app/helpers/pixel_buyer_helper.rb"
+			],
+			[
+				"sh",
+				"spec/spec_helper.rb"
+			],
+			[
+				"pbs",
+				"spec/helpers/pixel_buyer_spec.rb"
+			],
+			[
+				"pr",
+				"app/workers/pixel_registrator.rb"
+			],
+			[
+				"pi",
+				"app/models/pixel.rb"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/rails_projects/bitmonitor/bitmonitor.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 280.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

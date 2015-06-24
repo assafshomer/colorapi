@@ -1,0 +1,23 @@
+var bitcoin = require('bitcoinjs-lib');
+
+function signTx (unsignedTx, privateKey) {
+  var tx = bitcoin.Transaction.fromHex(unsignedTx)
+  var insLength = tx.ins.length
+  for (var i = 0; i < insLength; i++) {
+    tx.sign(i, privateKey)
+  }
+  return tx.toHex()
+}
+
+key = bitcoin.ECKey.fromWIF("KzH9zdXm95Xv3z7oNxzM6HqSPUiQbuyKoFdQBTf3HKx1B6eYdbAn");
+
+unsignedTx = '0100000001fa9e0775c969fe34b612b8008ac512d93a71196e59fb6366cf3ce42f227187df0000000000ffffffff03580200000000000047512103ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2103b4af67f2c9caa9672926492ad18bf58cb2c8657785e9e4d08afa74cec93de36a52ae00000000000000001c6a1a43430102a00a3e5f885af0b10ef0bde4c8cde5a9417067020110003c0f00000000001976a914ea55c2430dca31e56ef5ae55c2863dae65df908688ac00000000'
+
+
+
+console.log("Signed: "+signTx(unsignedTx,key))
+/*
+Signed: 0100000001fa9e0775c969fe34b612b8008ac512d93a71196e59fb6366cf3ce42f227187df000000006b483045022100e10eb5986f34d41efbc20e9454fbbaf505fd82744c9aa5e49a5789cd09d16cc802203b36abe0b8c0ab091207dfa94c240e2c74d840ee98990b333b15168d34ec5f95012102c5ac36c34715ebf5b82abab08132ca08e90cc40ed8c2ca29620d0f00f28655d6ffffffff03580200000000000047512103ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2103b4af67f2c9caa9672926492ad18bf58cb2c8657785e9e4d08afa74cec93de36a52ae00000000000000001c6a1a43430102a00a3e5f885af0b10ef0bde4c8cde5a9417067020110003c0f00000000001976a914ea55c2430dca31e56ef5ae55c2863dae65df908688ac00000000
+
+*/
+
