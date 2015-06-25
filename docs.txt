@@ -1,5 +1,6 @@
 sudo npm install bitcoinjs-lib
 sudo npm install request
+sudo npm install open
 
 1. address
 2. pay

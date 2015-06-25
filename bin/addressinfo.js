@@ -12,18 +12,16 @@ function getFromApi(api_endpoint, data, callback) {
 	    }
 	    console.log('Status:', response.statusCode);
 	    console.log('Body:', body);
-			fs.writeFile('./log/utxos.json', JSON.stringify(JSON.parse(body)['utxos']), function(err) {
+			fs.writeFile('./log/'+api_endpoint+'.json', body, function(err) {
 			    if(err) {
 			        return console.log(err);
 			    }
-			    console.log("utxos.json was saved!");
-			});	
+			    console.log("The file was saved!");
+			});	    
 	  	return callback(null, body);
 	});
 };
 
 getFromApi('addressinfo','n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR',function(err, body){
-  if (err) console.log('error: '+err);
+  if (err) consule.log('error: '+err);
 });
-
-

@@ -25,8 +25,13 @@ function postToApi(api_endpoint, json_data, callback) {
 
 var asset = {
     "issueAddress": address,
-    "amount": 1,
-    "fee": 1000,
+    "amount": 123,
+    "divisibility": 0,
+    "fee": 1234,
+    "transfer": [{
+    	"address": address,
+    	"amount": 1
+    }],
     "metadata": {
         "userData": {
             "ID": "ID",
