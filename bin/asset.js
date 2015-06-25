@@ -1,5 +1,6 @@
 var bitcoin = require('bitcoinjs-lib');
 var request = require('request');
+var fs = require('fs');
 
 assetid = 'LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ';
 txid='8ddaf1f77a38d7dc0a9ceb787f217f5d153a9a8eced2dd836ed04944dfcaf076'
