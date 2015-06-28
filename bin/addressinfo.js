@@ -13,13 +13,13 @@ function getFromApi(api_endpoint, data, callback) {
 	    }
 	    console.log('Status:', response.statusCode);
 	    console.log('Body:', body);
-			fs.writeFile('./log/'+api_endpoint+'_'+time+'.json', body, function(err) {
+			fs.writeFile('../log/'+api_endpoint+'_'+time+'.json', body, function(err) {
 			    if(err) {
 			        return console.log(err);
 			    }
 			    console.log("The file was saved!");
 			});
-			fs.writeFile('./log/utxos_'+time+'.json', JSON.stringify(JSON.parse(body)['utxos']), function(err) {
+			fs.writeFile('../log/utxos_'+time+'.json', JSON.stringify(JSON.parse(body)['utxos']), function(err) {
 			    if(err) {
 			        return console.log(err);
 			    }

@@ -21,7 +21,7 @@ function postToApi(api_endpoint, json_data, callback) {
 		}
 		console.log('Status: ', response.statusCode);
 		console.log('Body: ', JSON.stringify(body));
-		fs.writeFile('./log/'+api_endpoint+'_'+Date.now()+'.json', body, function(err) {
+		fs.writeFile('../log/'+api_endpoint+'_'+Date.now()+'.json', body, function(err) {
 		    if(err) {
 		        return console.log(err);
 		    }
