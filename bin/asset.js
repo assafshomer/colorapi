@@ -8,14 +8,6 @@ getFromApi('assetmetadata',assetid+'/'+txid+':'+index,function(err, body){
   if (err) consule.log('error: '+err);
 });
 
-// getFromApi('assetmetadata',assetid+'/0',function(err, body){
-//   if (err) consule.log('error: '+err);
-// });
-
-// getFromApi('stakeholders',assetid+'/0',function(err, body){
-//   if (err) consule.log('error: '+err);
-// });
-
-// getFromApi('addressinfo',assetid,function(err, body){
-//   if (err) consule.log('error: '+err);
-// });
+getFromApi('stakeholders',assetid,function(err, body){
+  if (err) consule.log('error: '+err);
+});

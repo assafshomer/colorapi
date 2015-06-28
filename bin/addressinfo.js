@@ -1,5 +1,7 @@
 require('../helpers/api_helper.js')();
+require('./current_address.js')();
+// address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR'
 
-getFromApi('addressinfo','n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR',function(err, body){
+getFromApi('addressinfo',address,function(err, body){
   if (err) consule.log('error: '+err);
 });

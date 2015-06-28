@@ -7,3 +7,5 @@ sudo npm install open
 3. issue_funded
 4. sign
 5. broadcast
+
+rm -f log/*.json

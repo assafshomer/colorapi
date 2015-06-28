@@ -1,5 +1,5 @@
-
-address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
+require('../bin/current_address.js')();
+// address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
 amount = 0.01;
 
 function qr_url(address,bitcoin_amount) {
