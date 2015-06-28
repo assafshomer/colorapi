@@ -38,6 +38,6 @@ var asset = {
 
 postToApi('issue', asset, function(err, body){
     if (err) {
-        consule.log('error: ', err);
+        console.log('error: ', err);
     }
 });

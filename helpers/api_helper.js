@@ -27,7 +27,7 @@ this.postToApi = function postToApi(api_endpoint, json_data, callback) {
 		    }
 		    console.log("The reply was saved to the log file ["+ log_file_name+"]");
 		});		
-		return callback(null, body);
+		return callback(null, body, log_file_name);
 	});
 };
 
@@ -49,7 +49,8 @@ this.getFromApi = function getFromApi(api_endpoint, data, callback) {
 			        return console.log(err);
 			    }
 			    console.log("The reply was saved to the log file ["+ log_file_name+"]");
-			});	  
+			});
+			return callback(null, body,log_file_name);	  
 	});
 };
 

@@ -6,7 +6,7 @@ new_address = 'mjoiF7kmEyoxH4dmyeptMhkDh4haGN4KYp'
 
 var asset = {
 		"from": address,
-    "fee": 1000,
+    "fee": 10000,
     "to": [{
     	"address": new_address,
     	"amount": 1,
@@ -15,6 +15,6 @@ var asset = {
 };
 
 postToApi('sendasset',asset,function(err, body){
-  if (err) consule.log('error: '+err);
+  if (err) console.log('error: '+err);
 });
 
