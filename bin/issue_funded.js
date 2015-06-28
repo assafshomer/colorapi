@@ -1,34 +1,6 @@
-var bitcoin = require('bitcoinjs-lib');
-var request = require('request');
-var fs = require('fs');
+require('../helpers/api_helper.js')();
 
 address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
-
-function postToApi(api_endpoint, json_data, callback) {
-	console.log(api_endpoint+': ', JSON.stringify(json_data));
-	request.post({
-		url: 'http://api.coloredcoins.org:80/v2/'+api_endpoint,
-		headers: {'Content-Type': 'application/json'},
-		form: json_data
-	}, 
-	function (error, response, body) {
-		if (error) {
-			return callback(error);
-		}
-		if (typeof body === String) {
-			body = JSON.parse(body);
-		}
-		console.log('Status: ', response.statusCode);
-		console.log('Body: ', JSON.stringify(body));
-		fs.writeFile('../log/'+api_endpoint+'_'+Date.now()+'.json', body, function(err) {
-		    if(err) {
-		        return console.log(err);
-		    }
-		    console.log("The file was saved!");
-		});		
-		return callback(null, body);
-	});
-};
 
 var asset = {
     "issueAddress": address,
