@@ -1,16 +1,18 @@
 require('../helpers/api_helper.js')();
-require('./current_address.js')();
-// address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
+require('../helpers/address_helper.js')();
+// require('./current_address.js')();
+address = 'mp4s1ancwRXLVH4QWP8aFMp6Z2SYcnLskV';
 
-new_address = 'mjoiF7kmEyoxH4dmyeptMhkDh4haGN4KYp'
+akp = newAddressKeyPair();
+new_address = akp['address'];
 
 var asset = {
 		"from": address,
-    "fee": 10000,
+    "fee": 1000,
     "to": [{
     	"address": new_address,
     	"amount": 1,
-    	"assetId": 'LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ'
+    	"assetId": 'LKKmzoiSMdFeHeC4TC4hzmprB3sR4jyWNV'
     }]
 };
 

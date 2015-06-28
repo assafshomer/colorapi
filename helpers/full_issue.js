@@ -57,7 +57,7 @@ setTimeout(function(){
                             if(err) {
                                 return console.log(err);
                             }
-                            console.log("Saved to private keys file [data/issuance.csv]");
+                            console.log("Saved to issuance file [data/issuance.csv]");
                         });                        
                     });                
             }

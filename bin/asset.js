@@ -4,9 +4,9 @@ require('../helpers/api_helper.js')();
 // txid='8ddaf1f77a38d7dc0a9ceb787f217f5d153a9a8eced2dd836ed04944dfcaf076'
 // index = '2'
 
-assetid = 'LVmupEGGyK7Xs5SV963jGYX9kjYvx4BcJ3';
-txid='5239237018de8b3c6f0e5af09edc4f403af3597ceb37b23fc69a424868745f1e'
-index = '2'
+assetid = 'LKKmzoiSMdFeHeC4TC4hzmprB3sR4jyWNV';
+txid='98dc807cb73ed849b00dd2f3613ff82270759674e3d38ab6170fbab8e42bcc5e'
+index = '3'
 
 
 
