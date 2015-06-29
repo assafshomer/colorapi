@@ -39,6 +39,6 @@ module.exports = function(){
 		return {"key":wif, "address":address};
 	};
 
-	this.address = 'msqgN6ahSbvZTxt1D5kduVZpvCupivagmB';
-	this.priv = 'L1f8FyVKM97LU8L9bjYqMv3tE6KrVfAavzdy7A2igV1voJM3UEkx';	
+	this.address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
+	this.priv = 'KzH9zdXm95Xv3z7oNxzM6HqSPUiQbuyKoFdQBTf3HKx1B6eYdbAn';	
 }
