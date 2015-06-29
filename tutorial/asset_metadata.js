@@ -3,7 +3,7 @@ var bitcoin = require('bitcoinjs-lib');
 var request = require('request');
 function getFromApi(api_endpoint, param, callback) {
 	console.log('Get from:'+api_endpoint+'/'+param);
-	request.get('http://api.coloredcoins.org:80/v2/'+api_endpoint+'/'+param, function (error, response, body) {
+	request.get('http://testnet.api.coloredcoins.org:80/v2/'+api_endpoint+'/'+param, function (error, response, body) {
 	    if (error) {
 	        return callback(error);
 	    }

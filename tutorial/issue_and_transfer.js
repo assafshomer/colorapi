@@ -8,7 +8,7 @@ console.log('new TESTNET address: ['+new_address+']');
 function postToApi(api_endpoint, json_data, callback) {
 	console.log(api_endpoint+': ', JSON.stringify(json_data));
 	request.post({
-		url: 'http://api.coloredcoins.org:80/v2/'+api_endpoint,
+		url: 'http://testnet.api.coloredcoins.org:80/v2/'+api_endpoint,
 		headers: {'Content-Type': 'application/json'},
 		form: json_data
 	}, 
