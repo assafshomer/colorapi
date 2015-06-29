@@ -1,9 +1,10 @@
 require('../helpers/api_helper.js')();
 require('../helpers/address_helper.js')();
-address = 'mp4s1ancwRXLVH4QWP8aFMp6Z2SYcnLskV';
 
 akp = newAddressKeyPair();
 new_address = akp['address'];
+
+address = 'mp4s1ancwRXLVH4QWP8aFMp6Z2SYcnLskV';
 
 var asset = {
 		"from": address,
@@ -14,6 +15,10 @@ var asset = {
     	"assetId": 'LKKmzoiSMdFeHeC4TC4hzmprB3sR4jyWNV'
     }]
 };
+
+getFromApi('stakeholders',asset['to'][0]["assetId"],function(err, body){
+  if (err) console.log('error: '+err);
+});
 
 postToApi('sendasset',asset,function(err, body){
   if (err) console.log('error: '+err);

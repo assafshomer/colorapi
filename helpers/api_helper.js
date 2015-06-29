@@ -1,14 +1,19 @@
 var request = require('request');
 var fs = require('fs');
 
+
 module.exports = function(){ 
+
+this.network = 'testnet';
+var prefix = (network=='bitcoin')?'':'testnet.';
+var root = 'http://'+prefix+'api.coloredcoins.org:80/v2/';
 
 this.postToApi = function postToApi(api_endpoint, json_data, callback) {
 	// console.log(api_endpoint+': ', JSON.stringify(json_data));
-	console.log('Post to:'+api_endpoint+'/',JSON.stringify(json_data));
+	console.log('Post to:'+root+api_endpoint+'/'+JSON.stringify(json_data));
 	var log_file_name = api_endpoint+'_'+Date.now()+'.json';
 	request.post({
-		url: 'http://api.coloredcoins.org:80/v2/'+api_endpoint,
+		url: root+api_endpoint,
 		headers: {'Content-Type': 'application/json'},
 		form: json_data
 	}, 
@@ -32,9 +37,9 @@ this.postToApi = function postToApi(api_endpoint, json_data, callback) {
 };
 
 this.getFromApi = function getFromApi(api_endpoint, data, callback) {
-	console.log('Get from:'+api_endpoint+'/', data);
+	console.log('Get from:'+root+api_endpoint+'/'+data);
 	var log_file_name = api_endpoint+'_'+Date.now()+'.json';
-	request.get('http://api.coloredcoins.org:80/v2/'+api_endpoint+'/'+data, function (error, response, body) {
+	request.get(root+api_endpoint+'/'+data, function (error, response, body) {
 	    if (error) {
 	        return callback(error);
 	    }
