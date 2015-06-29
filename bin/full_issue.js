@@ -8,12 +8,20 @@ var fs = require('fs');
 akp2 = newAddressKeyPair();
 new_address = akp2['address'];
 
-akp = newAddressKeyPair();
-address = akp['address'];
-key = akp['key'];
 
-amount = 0.01;
-fundAddress(address,amount);
+// IF YOU WANT TO USE A FUNDED ADDRESS, ADD HERE THE ADDRESS AND KEY AND COMMENT OUT THE NEXT SECTION
+
+address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
+key = 'KzH9zdXm95Xv3z7oNxzM6HqSPUiQbuyKoFdQBTf3HKx1B6eYdbAn';
+
+// IF YOU WANT TO USE NEW ADDRESS, COMMENT OUT THE PREVIOUS SECTION
+
+// akp = newAddressKeyPair();
+// address = akp['address'];
+// key = akp['key'];
+
+// amount = 0.01;
+// fundAddress(address,amount);
 
 var asset = {
     "issueAddress": address,

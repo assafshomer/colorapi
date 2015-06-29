@@ -1,5 +1,5 @@
 require('../helpers/api_helper.js')();
-require('..helpers/address_helper.js')();
+require('../helpers/address_helper.js')();
 
 // address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
 
@@ -8,10 +8,6 @@ var asset = {
     "amount": 123,
     "divisibility": 0,
     "fee": 1234,
-    "transfer": [{
-    	"address": address,
-    	"amount": 1
-    }],
     "metadata": {
         "userData": {
             "ID": "ID",
