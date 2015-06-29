@@ -64,10 +64,10 @@ setTimeout(function(){
                             }
                             console.log("Saved to issuance file [data/issuance.csv]");
                         });                        
-                    });                
+                    },5000);                
             }
         });
-      }, 10000);
+      }, 5000);
     }
     });
-}, 30000);
+}, 1000);

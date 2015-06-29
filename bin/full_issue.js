@@ -13,15 +13,16 @@ new_address = akp2['address'];
 
 // address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
 // key = 'KzH9zdXm95Xv3z7oNxzM6HqSPUiQbuyKoFdQBTf3HKx1B6eYdbAn';
+// wait_milis = 1000;
 
 // IF YOU WANT TO USE NEW ADDRESS, COMMENT OUT THE PREVIOUS SECTION
 
 akp = newAddressKeyPair();
 address = akp['address'];
 key = akp['key'];
-
 amount = 0.01;
 fundAddress(address,amount);
+wait_milis = 30000;
 
 var asset = {
     "issueAddress": address,
@@ -65,10 +66,10 @@ setTimeout(function(){
                             }
                             console.log("Saved to issuance file [data/issuance.csv]");
                         });                        
-                    });                
+                    },5000);                
             }
         });
-      }, 10000);
+      }, 5000);
     }
     });
-}, 30000);
+}, wait_milis);
