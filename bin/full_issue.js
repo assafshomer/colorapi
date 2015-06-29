@@ -11,24 +11,23 @@ new_address = akp2['address'];
 
 // IF YOU WANT TO USE A FUNDED ADDRESS, ADD HERE THE ADDRESS AND KEY AND COMMENT OUT THE NEXT SECTION
 
-address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
-key = 'KzH9zdXm95Xv3z7oNxzM6HqSPUiQbuyKoFdQBTf3HKx1B6eYdbAn';
+// address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
+// key = 'KzH9zdXm95Xv3z7oNxzM6HqSPUiQbuyKoFdQBTf3HKx1B6eYdbAn';
 
 // IF YOU WANT TO USE NEW ADDRESS, COMMENT OUT THE PREVIOUS SECTION
 
-// akp = newAddressKeyPair();
-// address = akp['address'];
-// key = akp['key'];
+akp = newAddressKeyPair();
+address = akp['address'];
+key = akp['key'];
 
-// amount = 0.01;
-// fundAddress(address,amount);
+amount = 0.01;
+fundAddress(address,amount);
 
 var asset = {
     "issueAddress": address,
-    "amount": 123,
+    "amount": 500000,
     "divisibility": 0,
-    "fee": 1234,
-    "transfer": [{"address": new_address,"amount": 33}],
+    "fee": 1000,    
     "metadata": {
         "userData": {
             "ID": "ID",
@@ -55,11 +54,11 @@ setTimeout(function(){
                 if (err) {
                     console.log('error: '+err);
             } else {
-                var path = '../log/'+file;
+                var post_path = '../log/'+file;
                     setTimeout(function(){
-                        var obj = JSON.parse(fs.readFileSync(path, 'utf8'));
+                        var obj = JSON.parse(fs.readFileSync(post_path, 'utf8'));
                         var txid = obj['txid']
-                        body=address+','+key.toWIF()+','+assetid+','+txid;
+                        body=address+','+key+','+assetid+','+txid;
                         fs.appendFile('../data/issuance.csv', body+'\n', function(err) {
                             if(err) {
                                 return console.log(err);
