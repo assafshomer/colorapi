@@ -5,12 +5,14 @@ require('../helpers/sign_helper.js')();
 require('../helpers/broadcast_helper.js')();
 var fs = require('fs');
 
+akp2 = newAddressKeyPair();
+new_address = akp2['address'];
+
 akp = newAddressKeyPair();
 address = akp['address'];
 key = akp['key'];
 
 amount = 0.01;
-wait_milis = 30000;
 fundAddress(address,amount);
 
 var asset = {
@@ -18,10 +20,7 @@ var asset = {
     "amount": 123,
     "divisibility": 0,
     "fee": 1234,
-    "transfer": [{
-    	"address": address,
-    	"amount": 55
-    }],
+    "transfer": [{"address": new_address,"amount": 33}],
     "metadata": {
         "userData": {
             "ID": "ID",
@@ -62,7 +61,7 @@ setTimeout(function(){
                     });                
             }
         });
-      }, 5000);
+      }, 10000);
     }
     });
-}, wait_milis);
+}, 30000);
