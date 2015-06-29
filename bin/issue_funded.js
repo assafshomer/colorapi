@@ -1,5 +1,5 @@
 require('../helpers/api_helper.js')();
-require('../current_address.js')();
+require('..helpers/address_helper.js')();
 
 // address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
 

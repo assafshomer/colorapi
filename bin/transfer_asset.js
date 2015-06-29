@@ -1,6 +1,5 @@
 require('../helpers/api_helper.js')();
 require('../helpers/address_helper.js')();
-// require('../current_address.js')();
 address = 'mp4s1ancwRXLVH4QWP8aFMp6Z2SYcnLskV';
 
 akp = newAddressKeyPair();
