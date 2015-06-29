@@ -8,9 +8,9 @@ require('../helpers/api_helper.js')();
 // txid='98dc807cb73ed849b00dd2f3613ff82270759674e3d38ab6170fbab8e42bcc5e'
 // index = '3'
 
-assetid = 'Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP'
-txid='2ea25d59979e35aec53037b2bf47014f21358f550c8ef290e04249b152ba3de5'
-index = '1'
+assetid = 'LcdJJ854b1q1PLRFiDq8mwmpTanFjgduiT'
+txid='6d71afc0f2e2eb138dfb9d7d27ab9b1910054585e290baf3cb661cbfb30762f5'
+index = '2'
 
 // getFromApi('assetmetadata',assetid,function(err, body){
 //   if (err) console.log('error: '+err);
@@ -20,6 +20,6 @@ getFromApi('assetmetadata',assetid+'/'+txid+':'+index,function(err, body){
   if (err) console.log('error: '+err);
 });
 
-// getFromApi('stakeholders',assetid,function(err, body){
-//   if (err) console.log('error: '+err);
-// });
+getFromApi('stakeholders',assetid,function(err, body){
+  if (err) console.log('error: '+err);
+});

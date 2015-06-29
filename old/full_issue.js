@@ -26,10 +26,6 @@ var asset = {
     "amount": 123,
     "divisibility": 0,
     "fee": 1234,
-    "transfer": [{
-    	"address": address,
-    	"amount": 1
-    }],
     "metadata": {
         "userData": {
             "ID": "ID",
