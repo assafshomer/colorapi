@@ -1,0 +1,162 @@
+In this section we will go through issuing a GET request to the colored coins API for an asset's metadata.
+
+[h]Query Asset Metadata[/h]
+
+[i]create a new file in the same directory where you installed BitcoinJS & Node js[/i]
+save the following into that file, say we call it <b>asset_metadata.js</b>.
+
+We use here the exact same code as was used in the previous section where we queried the asset's holders.
+
+[code]
+// asset_metadata.js
+var bitcoin = require('bitcoinjs-lib');
+var request = require('request');
+
+function getFromApi(api_endpoint, param, callback) {
+	console.log('Get from:'+api_endpoint+'/'+param);
+	request.get('http://testnet.api.coloredcoins.org:80/v2/'+api_endpoint+'/'+param, function (error, response, body) {
+	    if (error) {
+	        return callback(error);
+	    }
+	    if (typeof body === String) {
+	        body = JSON.parse(body);
+	    }
+	    console.log('Status:', response.statusCode);
+	    console.log('Body:', body);
+            return callback(null, body);
+	});
+};
+[/code]
+
+In this case we expect the following metadata
+[code]"metadata": {
+    "assetId": "1",
+    "assetName": "Asset Name",
+    "issuer": "Asset Issuer",
+    "description": "My Description",
+    "userData": {
+        "meta" : [
+            {key: "Item ID", value: 2, type: "Number"},
+            {key: "Item Name", value: "Item Name", type: "String"},
+            {key: "Company", value: "My Company", type: "String"},
+            {key: "Address", value: "San Francisco, CA", type: "String"}
+        ]
+    }
+}[/code]
+<table class="asaf"><tr><td>as the response from the colored coins API. This is the metadata of the asset with AssetID <a href="http://coloredcoins.org/explorer/testnet/asset/Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP" target="_blank">Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP</a> that we <a href="http://coloredcoins.org/documentation/#IssueandTransfer" target="_blank">stamped during issuance</a> in transaction <a href="http://coloredcoins.org/explorer/testnet/tx/2ea25d59979e35aec53037b2bf47014f21358f550c8ef290e04249b152ba3de5" target="_blank">2ea25d59979e35aec5303....</a>. 
+</td></tr></table> 
+
+Now let's prepare the data. In this case we need more than just the AssetID.
+[w]we must specify the <b>output</b> we are interested in.[/w]
+<table class="asaf"><tr><td>
+Looking at the list of outputs in the block explorer we see that our asset is listed in the second and fourth outputs. We can thus choose either index <b>1</b> or index <b>3</b>
+</td></tr></table> 
+
+[code]
+// asset_metadata.js
+....
+assetid = 'Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP'
+txid='2ea25d59979e35aec53037b2bf47014f21358f550c8ef290e04249b152ba3de5'
+index = '1'
+....
+[/code]
+
+In this case we are using the <b>'assetmetadata'</b> endpoint. This API endpoint is expecting the data in the following format
+
+[code]
+http://api..../assetmetadata/'transaction_id':'output_index'
+[/code]
+
+So, let's prepare the call:
+
+[code]
+// asset_metadata.js
+...
+getFromApi('assetmetadata',assetid+'/'+txid+':'+index,function(err, body){
+  if (err) console.log('error: '+err);
+});
+[/code]
+
+Now launch a terminal window and type
+
+[code]> node asset_metadata.js
+----------------
+Get from:assetmetadata/ Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP/2ea25d59979e35aec53037b2bf47014f21358f550c8ef290e04249b152ba3de5:1
+Status: 200
+Body: {"assetId":"Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP","divisibility":0,"lockStatus":null,"totalSupply":123,"numOfHolders":2,"numOfTransfers":0,"numOfIssuance":1,"firstBlock":486460,"issuanceTxid":"2ea25d59979e35aec53037b2bf47014f21358f550c8ef290e04249b152ba3de5","metadataOfIssuence":{"userData":{"ID":"test ID","Name":"new asset name","Description":"this asset is going to be transferred on issuance","Type":"movie ticket"}},"rulesOfIssuence":"none","sha2Issue":"0379755f244b2dac2c21006df137bf3be5f70e4aa111a82c9abbbd7191c1479f64","metadatOfUtxo":{"userData":{"ID":"test ID","Name":"new asset name","Description":"this asset is going to be transferred on issuance","Type":"movie ticket"}},"rulesofUtxo":"none","sha2Utxo":"0379755f244b2dac2c21006df137bf3be5f70e4aa111a82c9abbbd7191c1479f64"}
+>
+[/code] 
+
+
+let's unwrap the JSON response so that we can view it more easily:
+
+[code]{
+assetId: "Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP",
+divisibility: 0,
+lockStatus: null,
+totalSupply: 123,
+numOfHolders: 2,
+numOfTransfers: 0,
+numOfIssuance: 1,
+firstBlock: 486460,
+issuanceTxid: "2ea25d59979e35aec53037b2bf47014f21358f550c8ef290e04249b152ba3de5",
+metadataOfIssuence: {
+  assetId: "1",
+  assetName: "Asset Name",
+  assetGenesis: "",
+  issuer: "Asset Issuer",
+  description: "My Description",
+  userData: {
+    meta: [{
+      key: "Item ID",
+      value: "2",
+      type: "Number"
+    },{
+      key: "Item Name",
+      value: "Item Name",
+      type: "String"
+    },{
+      key: "Company",
+      value: "My Company",
+      type: "String"
+    },{
+      key: "Address",
+      value: "San Francisco, CA",
+      type: "String"
+    }
+  ]}
+},
+rulesOfIssuence: "none",
+sha2Issue: "0379755f244b2dac2c21006df137bf3be5f70e4aa111a82c9abbbd7191c1479f64",
+metadatOfUtxo: {
+  assetId: "1",
+  assetName: "Asset Name",
+  assetGenesis: "",
+  issuer: "Asset Issuer",
+  description: "My Description",
+  userData: {
+    meta: [{
+      key: "Item ID",
+      value: "2",
+      type: "Number"
+    },{
+      key: "Item Name",
+      value: "Item Name",
+      type: "String"
+    },{
+      key: "Company",
+      value: "My Company",
+      type: "String"
+    },{
+      key: "Address",
+      value: "San Francisco, CA",
+      type: "String"
+    }
+  ]}
+},
+rulesofUtxo: "none",
+sha2Utxo: "0379755f244b2dac2c21006df137bf3be5f70e4aa111a82c9abbbd7191c1479f64"
+}
+[/code]
+
+Indeed, the metadata that we inserted during issuance is there.

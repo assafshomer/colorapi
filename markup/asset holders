@@ -1,0 +1,109 @@
+In this section we will go through issuing a GET request to the colored coins API for a list of an asset's holders.
+Asset's holders are defined as the set of Bitcoin addresses with a non-zero balance for the asset in question.
+
+[h]Query Asset Holders[/h]
+
+[i]create a new file in the same directory where you installed BitcoinJS & Node js[/i]
+save the following into that file, say we call it <b>asset_holders.js</b>.
+
+First requiring the dependencies
+[code]// asset_holders.js
+var bitcoin = require('bitcoinjs-lib');
+var request = require('request');
+[/code]
+
+Now define a second auxiliary function, this time helping us with GET requests from the colored coins API.
+This function accepts the API end point and a parameter (as well as a callback).
+
+
+[code]
+// asset_holders.js
+...
+function getFromApi(api_endpoint, param, callback) {
+	console.log('Get from:'+api_endpoint+'/'+param);
+	request.get('http://testnet.api.coloredcoins.org:80/v2/'+api_endpoint+'/'+param, function (error, response, body) {
+	    if (error) {
+	        return callback(error);
+	    }
+	    if (typeof body === String) {
+	        body = JSON.parse(body);
+	    }
+	    console.log('Status:', response.statusCode);
+	    console.log('Body:', body);
+	    return callback(null, body);
+	});
+};
+...
+[/code]
+
+Now let's store in a variable the value of the AssetID we are actually interested in.
+
+[code]// asset_holders.js
+....
+assetid='your asset ID here';
+// e.g. assetid='LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ';
+[/code] 
+
+In this case we are issuing an API GET call  from the <b>'stakeholders'</b> endpoint.
+
+[code]// asset_holders.js
+....
+
+getFromApi('stakeholders',assetid,function(err, body){
+  if (err) console.log('error: ', err);
+});
+[/code]
+
+Now launch a terminal window and type
+
+[code]
+> node asset_holders.js
+----------------
+Get from:stakeholders/LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ/0
+Status: 200
+Body: {"assetId":"LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ","holders":[{"address":"n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR","amount":1}],"divisibility":0,"lockStatus":null}
+
+>
+[/code] 
+
+Let's unwrap the JSON object for easier view:
+
+[code]{
+assetId: "LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ",
+holders: [
+  {
+    address: "n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR",
+    amount: 1
+  }
+],
+divisibility: 0,
+lockStatus: null
+}[/code]
+
+As one would expect, the response contains a <b>'holders'</b> key whose value is a list of JSON objects, each specifying a Bitcoin address and the amount of asset units currently held in that address.
+
+<table class="asaf"><tr><td>Now let's do the same, this time to the asset with AssetID <a href="http://coloredcoins.org/explorer/testnet/asset/Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP" target="_blank">Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP</a> that we created with a transfer in transaction <a href="http://coloredcoins.org/explorer/testnet/tx/2ea25d59979e35aec53037b2bf47014f21358f550c8ef290e04249b152ba3de5" target="_blank">2ea25d59979e35aec53037b2bf47014f21358f550c8ef290e04249b152ba3de5</a>
+</td></tr></table> 
+This time the response is:
+
+[code]Body: {"assetId":"Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP","holders":[{"address":"miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL","amount":33},{"address":"n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR","amount":90}],"divisibility":0,"lockStatus":null}[/code]
+
+Again, unwrap for easier view:
+
+[code]{assetId: "Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP",
+holders: [
+  {
+    "address": "miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL",
+    "amount":33},
+  {
+    "address": "n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR",
+    "amount":90
+  }
+],
+divisibility: 0,
+lockStatus: null
+}[/code]
+
+<table class="asaf"><tr><td>and indeed, 33 units are held in the new address <a href="http://coloredcoins.org/explorer/testnet/address/miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL" target="_blank"> miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL</a>
+and the remaining 90 units held in the issuance address <a href="http://coloredcoins.org/explorer/testnet/address/n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR" target="_blank">n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR</a>
+</td></tr></table> 

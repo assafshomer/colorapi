@@ -1,0 +1,41 @@
+[h]Creating a new testnet address[/h]
+
+<table class="asaf"><tr><td>In this section we will create a new <a href="https://en.bitcoin.it/wiki/Testnet" target="_blank">TESTNET</a> Bitcoin address and fund it with test-bitcoins. The reason that we are using TESTNET is that issuing an asset requires funding and we don't want to spend real bitcoins in this tutorial.</td></tr></table> 
+
+[i]create a new file in the same directory where you installed BitcoinJS and Node js[/i]
+save the following into that file, say we call it <b>address.js</b>
+
+First requiring the dependencies
+[code]
+// address.js
+var bitcoin = require('bitcoinjs-lib');
+[/code]
+Creating a new bitcoin key object and extracting the TESTNET address 
+[code]
+// address.js
+...
+key = bitcoin.ECKey.makeRandom();
+address = key.pub.getAddress(bitcoin.networks.testnet).toString();
+console.log('new TESTNET address: ['+address+']');
+wif = key.toWIF();
+console.log('Private Key of new address (WIF format): ['+wif+']');
+...
+[/code]
+
+Now launch a terminal window and type
+
+[code]> node address.js
+new TESTNET address: [n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR]
+Private Key of new address (WIF format): [KzH9zdXm95Xv3z7oNxzM6HqSPUiQbuyKoFdQBTf3HKx1B6eYdbAn][/code] 
+
+A new TESTNET address was printed to the screen.
+
+<table class="asaf"><tr><td>Let's copy the new address we just generated and launch a web browser pointing to a testnet faucet, say <a href="http://tpfaucet.appspot.com/" target="_blank">this one</a>. Testnet faucets are websites that give away free test-bitcoins (which have no monetary value) so that developers can use them for testing Bitcoin software.</td></tr></table> 
+
+Paste the newly generated testnet address you just created into the faucet, fill in the captcha and hit <b>send</b>. You are now the owner of (valueless) test-bitcoins!
+
+<table class="asaf"><tr><td>To see your balance online you can use <a href="http://coloredcoins.org/explorer/testnet" target="_blank">our TESTNET explorer</a>. Paste your TESTNET address into the search box and hit the search button. You should see the test-bitcoin balance in your address.</td></tr></table> 
+
+
+
+

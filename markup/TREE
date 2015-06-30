@@ -1,0 +1,27 @@
+Introduction	
+API Endpoints	
+	issueAsset	
+	sendAsset	
+	broadcastTransaction	
+	getAssetMetadata	
+	getAssetHolders	
+	getAddressInfo	
+Getting Started	
+	Setup	
+		Node js	
+		BitcoinJS
+		Request
+		Creating a Testnet Address
+	Issue a new asset
+		Issuance - 1st attempt
+		Issuance - 2nd attempt
+		Sign Transaction
+		Broadcast Transaction
+		Issue and Transfer
+	Query an Asset
+		Asset Holders
+		Asset Metadata
+	Query an Address
+	Transfer an asset
+		Transfer - 1st attempt
+		Transfer - 2nd attempt

@@ -1,0 +1,97 @@
+[h]Generating an issuance transaction[/h]
+
+<table class="asaf"><tr><td>In this section we will issue a new asset on a our previously funded <a href="https://en.bitcoin.it/wiki/Testnet" target="_blank">TESTNET</a> address.</td></tr></table> 
+
+[i]create a new file in the same directory where you installed BitcoinJS and Node js[/i]
+save the following into that file, say we call it <b>issue_funded.js</b>.
+
+First requiring the dependencies
+[code]
+// issue_funded.js
+var bitcoin = require('bitcoinjs-lib');
+var request = require('request');
+[/code]
+Using our funded TESTNET address 
+[code]
+// issue_funded.js
+...
+address = 'your funded address here'
+// e.g. address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
+...
+[/code]
+
+Now use the same code for calling the colored coins API and preparing the data
+
+[code]
+// issue_funded.js
+...
+function postToApi(api_endpoint, json_data, callback) {
+	console.log(api_endpoint+': ', JSON.stringify(json_data));
+	request.post({
+		url: 'http://testnet.api.coloredcoins.org:80/v2/'+api_endpoint,
+		headers: {'Content-Type': 'application/json'},
+		form: json_data
+	}, 
+	function (error, response, body) {
+		if (error) {
+			return callback(error);
+		}
+		if (typeof body === String) {
+			body = JSON.parse(body);
+		}
+		console.log('Status: ', response.statusCode);
+		console.log('Body: ', JSON.stringify(body));
+		return callback(null, body);
+	});
+};
+
+var asset = {
+    "issueAddress": address,
+    "amount": 1,
+    "fee": 1000,
+    "metadata": {
+        "assetId": "1",
+        "assetName": "Asset Name",
+        "issuer": "Asset Issuer",
+        "description": "My Description",
+        "userData": {
+            "meta" : [
+                {key: "Item ID", value: 2, type: "Number"},
+                {key: "Item Name", value: "Item Name", type: "String"},
+                {key: "Company", value: "My Company", type: "String"},
+                {key: "Address", value: "San Francisco, CA", type: "String"}
+            ]
+        }
+    }
+};
+
+postToApi('issue', asset, function(err, body){
+    if (err) {
+        console.log('error: ', err);
+    }
+});
+[/code]
+
+Launch a terminal window and run the new file
+
+[code]
+> node issue_funded.js
+----------------------
+
+issue:  {"issueAddress":"n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR","amount":1,"fee":1000,"metadata":{"userData":{"ID":"ID","Name":"AssetName","Description":"AssetDescription","Type":"AssetType"}}}
+Status:  200
+Body:  "{\"txHex\":\"0100000001fa9e0775c969fe34b612b8008ac512d93a71196e59fb6366cf3ce42f227187df0000000000ffffffff03580200000000000047512103ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2103b4af67f2c9caa9672926492ad18bf58cb2c8657785e9e4d08afa74cec93de36a52ae00000000000000001c6a1a43430102a00a3e5f885af0b10ef0bde4c8cde5a9417067020110003c0f00000000001976a914ea55c2430dca31e56ef5ae55c2863dae65df908688ac00000000\",\"assetId\":\"LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ\"}"
+
+>
+[/code] 
+
+
+<table class="asaf"><tr><td>This time we successfully created a (hexadecimal representation of) a new colored transaction, specifically an <a href="https://github.com/Colored-Coins/Colored-Coins-Protocol-Specification/wiki/Coloring%20Scheme#issuance-and-transfer-transactions" target="_blank">issuance transaction</a>.
+Note that the second returned value (you may have to scroll to the right to see it) is the <a href="https://github.com/Colored-Coins/Colored-Coins-Protocol-Specification/wiki/Asset-ID" target="_blank">Asset ID</a>: LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ. Incidentally, note that the first letter of the Asset ID is "L". This indicates that the asset we are in the process of issuing will be a <a href="https://github.com/Colored-Coins/Colored-Coins-Protocol-Specification/wiki/Asset-ID#locked-asset-ids" target="_blank">Locked Asset</a>.</td></tr></table>
+
+[i]What remains to be done is to sign the transaction and broadcast it to the Bitcoin (TESTNET) network[/i]
+Let's first sign the transaction.
+
+
+
+

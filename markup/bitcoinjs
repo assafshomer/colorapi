@@ -1,0 +1,27 @@
+[h] Installing <a href="https://bitcoinjs.org/" target="_blank">Bitcoin JS</a> [/h]
+
+[code]
+> sudo npm install bitcoinjs-lib
+[/code]
+[h] Verify installation [/h]
+
+[i]Save the following code into a file verify_bjs.js[/i]
+[code]
+var bitcoin = require('bitcoinjs-lib');
+key = bitcoin.ECKey.makeRandom();
+address = key.pub.getAddress().toString();
+console.log('new bitcoin address: ['+address+']');
+[/code]
+
+Now launch a terminal window and type
+
+[code]
+> node verify_bjs.js
+[/code]
+
+You should see an output of the form:
+
+[code]
+New Bitcoin Address:[1L1emXigzg7dPc92eYRHaf1TQtZ7n9ri3n]
+[/code]
+showing the new Bitcoin address that was just generated.

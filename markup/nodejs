@@ -1,0 +1,40 @@
+[i] <a href="https://nodejs.org/" target="_blank">node js</a> [/i]
+
+In this section we show how to install node js so that anyone can follow the rest of the examples in this getting started guide.
+Of course, node js is not mandatory for using our api, but since all the examples are written in node we present it here for completeness.
+
+[i] Installing Node js [/i]
+
+For example, on Linux (Ubuntu), launch a terminal window and type this to download the package:
+
+[code]
+> curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+[/code]
+
+Now type this to install node js
+
+[code]
+> sudo apt-get install -y nodejs
+[/code]
+
+[i] Now verify installation [/i]
+
+Open a text editor and save the following in a file called example.js
+[code]
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Colored Coins\n');
+}).listen(1337, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:1337/');
+[/code]
+
+Now launch a terminal window and type
+
+[code]
+> node example.js
+[/code]
+
+Launch a web browser and visit <a href="http://127.0.0.1:1337/" target="_blank">localhost:1337</a>
+
+You should see the text "Colored Coins"

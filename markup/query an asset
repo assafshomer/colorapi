@@ -1,0 +1,9 @@
+Now that you have created a new asset
+
+[code]
+Asset ID: 'your asset ID here'
+// e.g.: Asset ID: LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ
+[/code]
+
+you can use the API to get some information about it.
+

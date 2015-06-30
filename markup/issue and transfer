@@ -1,0 +1,119 @@
+[h]Issuing and transferring an asset in one transaction[/h]
+
+<table class="asaf"><tr><td>One of the benefits of the colored coins protocol is the ability to issue an asset and send it within the same transaction. In this section we will use the colored coins API to <a href="https://github.com/Colored-Coins/Colored-Coins-Protocol-Specification/wiki/Coloring%20Scheme#issuance-and-transfer-transactions" target="_blank">issue & transfer</a> an asset.</td></tr></table>
+
+[i]create a new file in the same directory where you installed BitcoinJS and Node js[/i]
+save the following into that file, say we call it <b>issue_and_transfer.js</b>.
+
+As before, require the dependencies
+[code]
+// issue_and_transfer.js
+var bitcoin = require('bitcoinjs-lib');
+var request = require('request');
+[/code]
+Using the funded TESTNET address for issuance
+[code]
+// issue_and_transfer.js
+...
+address = 'your funded address here';
+// e.g. address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
+...
+[/code]
+
+Add a new Bitcoin address. This is where we are going to send some of the newly created asset.
+
+[code]
+// issue_and_transfer.js
+...
+key = bitcoin.ECKey.makeRandom();
+new_address = key.pub.getAddress(bitcoin.networks.testnet).toString();
+console.log('new TESTNET address: ['+new_address+']');
+...
+[/code]
+
+Now use the familiar code for calling the colored coins API and preparing the data
+
+[code]
+// issue_and_transfer.js
+...
+function postToApi(api_endpoint, json_data, callback) {
+	console.log(api_endpoint+': ', JSON.stringify(json_data));
+	request.post({
+		url: 'http://testnet.api.coloredcoins.org:80/v2/'+api_endpoint,
+		headers: {'Content-Type': 'application/json'},
+		form: json_data
+	}, 
+	function (error, response, body) {
+		if (error) {
+			return callback(error);
+		}
+		if (typeof body === String) {
+			body = JSON.parse(body);
+		}
+		console.log('Status: ', response.statusCode);
+		console.log('Body: ', JSON.stringify(body));
+		return callback(null, body);
+	});
+};
+...
+[/code]
+
+Now when we prepare the asset data we are going to also declare a transfer, like so:
+
+[code]
+// issue_and_transfer.js
+...
+var asset = {
+    "issueAddress": address,
+    "amount": 123,
+    "fee": 1234,
+    "transfer":[{
+        "address": new_address,
+        "amount": 33
+     }],
+    "metadata": {
+        "assetId": "1",
+        "assetName": "Asset Name",
+        "issuer": "Asset Issuer",
+        "description": "My Description",
+        "userData": {
+            "meta" : [
+                {key: "Item ID", value: 2, type: "Number"},
+                {key: "Item Name", value: "Item Name", type: "String"},
+                {key: "Company", value: "My Company", type: "String"},
+                {key: "Address", value: "San Francisco, CA", type: "String"}
+            ]
+        }
+    }
+}
+...
+[/code]
+
+And finally add the API call
+
+[code]
+// issue_and_transfer.js
+...
+postToApi('issue', asset, function(err, body){
+    if (err) {
+        console.log('error: ', err);
+    }
+});
+[/code]
+
+Launch a terminal window and run the new file
+
+[code]
+> node issue_and_transfer.js
+[/code]
+
+Following the same steps as before, sign the transaction and broadcast it to the TESTNET network. 
+
+The example above yielded the following result:
+
+[code]
+Body:  "{\"txHex\":\"01000000015d936ddcce4f77ba6efb5e8cea6b48ee86021150af4df94089bc438df1de75290100000000ffffffff04580200000000000047512103ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff210379755f244b2dac2c21006df137bf3be5f70e4aa111a82c9abbbd7191c1479f6452ae58020000000000001976a9141fbdbd176079a667572cc875f5a4e11ba42f89d988ac0000000000000000206a1e434301024560894f82c4b640212c87f48561e0fcb703de0027b001221010087e0100000000001976a914ea55c2430dca31e56ef5ae55c2863dae65df908688ac00000000\",\"assetId\":\"Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP\"}"
+[/code]
+
+<table class="asaf"><tr><td>You can look at this <a href="http://coloredcoins.org/explorer/testnet/tx/2ea25d59979e35aec53037b2bf47014f21358f550c8ef290e04249b152ba3de5" target="_blank">transaction</a> using our TESTNET explorer and convince yourself that indeed 33 units of the asset <a href="http://coloredcoins.org/explorer/testnet/asset/Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP" target="_blank">Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP</a> were sent to the new address <a href="http://coloredcoins.org/explorer/testnet/address/miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL" target="_blank"> miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL</a>. Note that even though it was not explicitly specified, the remaining 90 units of the asset (since 123 were issued) were automatically sent back to the issuance address <a href="http://coloredcoins.org/explorer/testnet/address/n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR" target="_blank">n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR</a>, as is dictated by the <a href="https://github.com/Colored-Coins/Colored-Coins-Protocol-Specification/wiki/Transfer%20Encoding#transfer-rules" target="_blank">transfer rules</a> of the colored coins protocol.
+</td></tr></table> 

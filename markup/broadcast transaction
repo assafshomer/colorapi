@@ -1,0 +1,73 @@
+[h]Broadcasting the signed transaction[/h]
+
+We are going to use the <b>broadcast</b> API endpoint in order to broadcast the signed transaction.
+
+
+[i]create a new file, say <b>broadcast.js</b>, in the same directory.[/i]
+
+Requiring the same dependencies and using the exact same postToApi function
+[code]
+// broadcast.js
+var bitcoin = require('bitcoinjs-lib');
+var request = require('request');
+
+function postToApi(api_endpoint, json_data, callback) {
+	console.log(api_endpoint+': ', JSON.stringify(json_data));
+	request.post({
+		url: 'http://testnet.api.coloredcoins.org:80/v2/'+api_endpoint,
+		headers: {'Content-Type': 'application/json'},
+		form: json_data
+	}, 
+	function (error, response, body) {
+		if (error) {
+			return callback(error);
+		}
+		if (typeof body === String) {
+			body = JSON.parse(body);
+		}
+		console.log('Status: ', response.statusCode);
+		console.log('Body: ', JSON.stringify(body));
+		return callback(null, body);
+	});
+};
+...
+[/code]
+
+We now add the JSON data to be posted to the API endpoint. This API endpoint is expecting a JSON object with the key <b>txHex</b>
+
+[code]
+// broadcast.js
+...
+var signedTxHex= '0100000001fa9e0775c969fe34b612b8008ac512d93a71196e59fb6366cf3ce42f227187df000000006b483045022100e10eb5986f34d41efbc20e9454fbbaf505fd82744c9aa5e49a5789cd09d16cc802203b36abe0b8c0ab091207dfa94c240e2c74d840ee98990b333b15168d34ec5f95012102c5ac36c34715ebf5b82abab08132ca08e90cc40ed8c2ca29620d0f00f28655d6ffffffff03580200000000000047512103ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2103b4af67f2c9caa9672926492ad18bf58cb2c8657785e9e4d08afa74cec93de36a52ae00000000000000001c6a1a43430102a00a3e5f885af0b10ef0bde4c8cde5a9417067020110003c0f00000000001976a914ea55c2430dca31e56ef5ae55c2863dae65df908688ac00000000'
+;
+
+var transaction = {
+    'txHex': signedTxHex
+}
+
+postToApi('broadcast', transaction, function(err, body){
+    if (err) {
+        console.log('error: ', err);
+    }
+});
+[/code]
+
+As before, Launch a terminal window and type
+[code]
+> node broadcast.js
+-------------------
+
+broadcast:  {"txHex":"0100000001fa9e0775c969fe34b612b8008ac512d93a71196e59fb6366cf3ce42f227187df000000006b483045022100e10eb5986f34d41efbc20e9454fbbaf505fd82744c9aa5e49a5789cd09d16cc802203b36abe0b8c0ab091207dfa94c240e2c74d840ee98990b333b15168d34ec5f95012102c5ac36c34715ebf5b82abab08132ca08e90cc40ed8c2ca29620d0f00f28655d6ffffffff03580200000000000047512103ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff2103b4af67f2c9caa9672926492ad18bf58cb2c8657785e9e4d08afa74cec93de36a52ae00000000000000001c6a1a43430102a00a3e5f885af0b10ef0bde4c8cde5a9417067020110003c0f00000000001976a914ea55c2430dca31e56ef5ae55c2863dae65df908688ac00000000"}
+Status:  200
+Body:  "{\"txid\":\"8ddaf1f77a38d7dc0a9ceb787f217f5d153a9a8eced2dd836ed04944dfcaf076\"}"
+
+>
+[/code]
+
+[i]Success! We issued our first Asset on top of the Bitcoin TESTNET network[/i]
+
+<table class="asaf"><tr><td>What we got in response was the transaction ID of the transaction that was successfully broadcast. We can look at this <a href="http://coloredcoins.org/explorer/testnet/tx/8ddaf1f77a38d7dc0a9ceb787f217f5d153a9a8eced2dd836ed04944dfcaf076" target="_blank">transaction</a> with our TESTNET explorer. Note the expected structure of an <a href="https://github.com/Colored-Coins/Colored-Coins-Protocol-Specification/wiki/Coloring-Scheme#issuance-and-transfer-transactions" target="_blank">Issuance Transaction</a>. We can see the <a href="https://github.com/Colored-Coins/Colored-Coins-Protocol-Specification/wiki/Coloring-Scheme#op_return" target="_blank">OP_RETURN</a> output, the <a href="https://github.com/Colored-Coins/Colored-Coins-Protocol-Specification/wiki/Coloring-Scheme#multisignature-addresses-multisig" target="_blank">1 of 2 multisignature</a> output and the fact that since nothing else was specified, everything (bitcoins and assets) was <a href="https://github.com/Colored-Coins/Colored-Coins-Protocol-Specification/wiki/Transfer%20Encoding#transfer-rules" target="_blank">transferred back</a> to the address 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR'
+</td></tr></table> 
+
+<table class="asaf"><tr><td>Now let's look at the same transaction with the <a href="http://coloredcoins.org/explorer/testnet/tx/8ddaf1f77a38d7dc0a9ceb787f217f5d153a9a8eced2dd836ed04944dfcaf076" target="_blank">colored coins explorer</a>. The colored coins explorer recognizes that in this transaction 1 unit of the <a href="http://coloredcoins.org/explorer/testnet/asset/LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ" target="_blank">asset</a> was sent to the issuance address <a href="http://coloredcoins.org/explorer/testnet/address/n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR" target="_blank"> n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR</a>
+</td></tr></table> 

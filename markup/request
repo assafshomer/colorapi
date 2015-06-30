@@ -1,0 +1,7 @@
+we also use a library to handle http requests
+
+[h]Installing request[/h]
+
+[code]
+> sudo npm install request
+[/code]

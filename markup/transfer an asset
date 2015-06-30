@@ -1,0 +1,13 @@
+In this section we review the process of transferring an existing asset using the colored coins API.
+
+
+<table class="asaf"><tr><td>Let's track back and look at the asset with AssetID <a href="http://coloredcoins.org/explorer/testnet/asset/Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP" target="_blank">Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP</a> we <a href="http://coloredcoins.org/documentation/#IssueandTransfer" target="_blank">recently created</a>.
+There are <b>33</b> units sitting in address 
+<a href="http://coloredcoins.org/explorer/testnet/address/miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL" target="_blank">miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL</a> and another <b>90</b> units in the original issuance address <a href="http://coloredcoins.org/explorer/testnet/address/n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR" target="_blank">n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR</a>
+</td></tr></table>
+
+[h]transferring an asset[/h]
+
+<table class="asaf"><tr><td>Le'ts start by attempting to transfer a few units of this asset from the first address 
+<a href="http://coloredcoins.org/explorer/testnet/address/miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL" target="_blank">miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL</a> to another address.
+</td></tr></table>

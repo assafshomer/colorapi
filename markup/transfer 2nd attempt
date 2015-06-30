@@ -1,0 +1,73 @@
+[h]Transferring from a funded address[/h]
+<table class="asaf"><tr><td>
+In this section we will attempt to construct a transfer transaction sending <b>5</b> units of the asset <a href="http://coloredcoins.org/explorer/testnet/asset/Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP" target="_blank">Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP</a> from the 
+issuance address <a href="http://coloredcoins.org/explorer/testnet/address/n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR" target="_blank">n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR</a> to a new random address.
+</td></tr></table>
+
+[i]create a new file in the same directory where you installed BitcoinJS and Node js[/i]
+save the following into that file, say we call it <b>transfer_funded.js</b>.
+
+Use exactly the same code as in the previous section, except change the <b>from_address</b>
+[code]// transfer_funded.js
+var bitcoin = require('bitcoinjs-lib');
+var request = require('request');
+
+function postToApi(api_endpoint, json_data, callback) {
+	console.log(api_endpoint+': ', JSON.stringify(json_data));
+	request.post({
+		url: 'http://testnet.api.coloredcoins.org:80/v2/'+api_endpoint,
+		headers: {'Content-Type': 'application/json'},
+		form: json_data
+	}, 
+	function (error, response, body) {
+		if (error) {
+			return callback(error);
+		}
+		if (typeof body === String) {
+			body = JSON.parse(body);
+		}
+		console.log('Status: ', response.statusCode);
+		console.log('Body: ', JSON.stringify(body));
+		return callback(null, body);
+	});
+};
+
+from_address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
+
+key = bitcoin.ECKey.makeRandom();
+to_address = key.pub.getAddress(bitcoin.networks.testnet).toString();
+console.log('new TESTNET address: ['+to_address+']');
+
+var asset = {
+	"from": from_address,		
+    "fee": 1000,
+    "to": [{
+    	"address": to_address,
+    	"amount": 5,
+    	"assetId": 'Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP'
+    }]
+};
+
+postToApi('sendasset', asset, function(err, body){
+    if (err) {
+        console.log('error: ', err);
+    }
+});
+[/code]
+
+And run the code by launching a terminal window and typing
+
+[code]> node transfer_funded.js
+--------------------
+new TESTNET address: [muit9HbhyhWtyiiFJGKss1862fWC5uJtkN]
+sendasset:  {"from":"n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR","fee":1000,"to":[{"address":"muit9HbhyhWtyiiFJGKss1862fWC5uJtkN","amount":5,"assetId":"Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP"}]}
+Status:  200
+Body:  "{\"txHex\":\"0100000002e53dba52b14942e090f28e0c558f35214f0147bfb23730c5ae359e97595da22e0300000000ffffffff56a639c7fa43195acadfb43ef01bbb68404b2ca1f5231ed6dc1de243235104a50100000000ffffffff0358020000000000001976a9149bd3498cc4008c4c7a14e775d0ded5452f9cee9d88ac0000000000000000086a0643430115000568fe0200000000001976a914ea55c2430dca31e56ef5ae55c2863dae65df908688ac00000000\"}"
+[/code]
+
+Success!! we constructed the hexadecimal representation of the unsigned transfer transaction.
+
+<table class="asaf"><tr><td>
+Now all we need to do is <a href="http://coloredcoins.org/documentation/#SignTransaction" target="_blank">sign</a> and <a href="http://coloredcoins.org/documentation/#BroadcastTransaction" target="_blank">broadcast</a> the transfer transaction.
+to do that, follow the same steps as before. 
+</td></tr></table>

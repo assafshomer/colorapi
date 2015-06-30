@@ -1,0 +1,95 @@
+<table class="asaf"><tr><td>In this section we are going to try and transfer <b>5</b> units of the <a href="http://coloredcoins.org/explorer/testnet/asset/Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP" target="_blank">Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP</a> asset from the address 
+<a href="http://coloredcoins.org/explorer/testnet/address/miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL" target="_blank">miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL</a> to a new address.
+</td></tr></table>
+
+[i]create a new file in the same directory where you installed BitcoinJS and Node js[/i]
+save the following into that file, say we call it <b>transfer.js</b>.
+
+We use the same code as before for posting to the colored coins API
+[code]// transfer.js
+var bitcoin = require('bitcoinjs-lib');
+var request = require('request');
+
+function postToApi(api_endpoint, json_data, callback) {
+	console.log(api_endpoint+': ', JSON.stringify(json_data));
+	request.post({
+		url: 'http://testnet.api.coloredcoins.org:80/v2/'+api_endpoint,
+		headers: {'Content-Type': 'application/json'},
+		form: json_data
+	}, 
+	function (error, response, body) {
+		if (error) {
+			return callback(error);
+		}
+		if (typeof body === String) {
+			body = JSON.parse(body);
+		}
+		console.log('Status: ', response.statusCode);
+		console.log('Body: ', JSON.stringify(body));
+		return callback(null, body);
+	});
+};
+....[/code]
+
+Now add the reference to the address from which we attempt to send, and create on the fly a new random address to which we aim to send the asset.
+
+[code]
+// transfer.js
+...
+from_address = 'miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL';
+
+key = bitcoin.ECKey.makeRandom();
+to_address = key.pub.getAddress(bitcoin.networks.testnet).toString();
+console.log('new TESTNET address: ['+to_address+']');
+...
+[/code]
+
+
+Now define the asset JSON specifying the source and target addresses as well as the AssetID and the amount of asset units to send
+[code]// transfer.js
+...
+var asset = {
+	"from": from_address,		
+    "fee": 1000,
+    "to": [{
+    	"address": to_address,
+    	"amount": 5,
+    	"assetId": 'Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP'
+    }]
+};
+...
+[/code]
+
+Finally, let's make the api call to the <b>'sendasset'</b> endpoint:
+
+And finally add the API call
+
+[code]
+// transfer.js
+...
+postToApi('sendasset', asset, function(err, body){
+    if (err) {
+        console.log('error: ', err);
+    }
+});
+[/code]
+
+And run the code by launching a terminal window and typing
+
+[code]> node transfer.js
+--------------------
+new TESTNET address: [n4kh6T3BNrkheENzwmEsVCbPmrXvS2piDe]
+sendasset:  {"from":"miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL","fee":1000,"to":[{"address":"n4kh6T3BNrkheENzwmEsVCbPmrXvS2piDe","amount":5,"assetId":"Lb9W5W5EFHhXK5Uv9rcMRvPV9WzJyPxpFP"}]}
+Status:  500
+Body:  "{\"error\":\"not enough satoshi in account for fees\"}"
+[/code]
+
+The colored coins API returned an error. Let's see what is going on.
+
+<table class="asaf"><tr><td>If we look closely at the address 
+<a href="http://coloredcoins.org/explorer/testnet/address/miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL" target="_blank">miQnYGkmPZ5yne2S2n3UibxZLcAhMhNCAL</a> we see that the only balance available are the <b>600 satoshis</b> sent during issuance in transaction <a href="http://coloredcoins.org/explorer/testnet/tx/2ea25d59979e35aec53037b2bf47014f21358f550c8ef290e04249b152ba3de5" target="_blank">2ea25d59979e35aec5303....</a>.
+Indeed, 600 satoshis are not enough to cover the intended transfer transaction fees.
+</td></tr></table>
+
+We can do one of two things. Either send some satoshis to this address, or use the second address which has enough balance to carry the desired transfer transaction. Let's do the latter.
+ 
