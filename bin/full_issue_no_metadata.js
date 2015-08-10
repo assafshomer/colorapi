@@ -28,25 +28,8 @@ wait_milis = 1000;
 
 var asset = {
     "issueAddress": address,
-    "amount": 500000,
-    "divisibility": 0,
-    "fee": 1000,    
-    // "metadata": {
-    //     "assetId": "askjdfaksjdflasdlkfj",
-    //     "assetName": "some lone asset name that I just invented",        
-    //     "issuer": "the issuer of this asset is currently in hiding", // Name of the asset issuer
-    //     "description": "I have to make up some long description",
-    //     "urls": [{"name": 'foo',"url": 'http://wwww.gooooggggle.com', "mimeType": 'text/html', "dataHash": '123'}], // array of urlItems
-    //     "userData" : {"meta": [
-    //             {"key": 'bar', "value": 1234, "type": 'Number'},
-    //             {"key": 'buzz', "value": "xxxxxx", "type": 'String'},
-    //             {"key": 'quuax', "value": true, "type": 'Boolean'}
-    //         ]
-    //     } 
-    // }
-    // "encryptions": [
-    //     {"key": "Name", "pubKey": pair['public'],"format":"pem","type":'pkcs1' }
-    // ]
+    "amount": 1,    
+    "fee": 1000
 };
 
 setTimeout(function(){
