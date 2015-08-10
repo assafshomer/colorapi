@@ -17,7 +17,7 @@ function getFromApi(api_endpoint, param, callback) {
 	});
 };
 
-assetid='LgcDSqEnNGNdZPvBA8eGNaFUXA6Yjms7YZ'
+assetid='LKXjG9uMSFoDj2Z6NrEJ6nkcRGVtjUmC4zrtH'
 
 getFromApi('stakeholders',assetid,function(err, body){
   if (err) consule.log('error: ', err);

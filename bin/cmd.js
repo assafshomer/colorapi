@@ -1,13 +1,4 @@
-require('../helpers/api_helper.js')();
-require('../helpers/pay_helper.js')();
-require('../helpers/address_helper.js')();
-require('../helpers/sign_helper.js')();
-require('../helpers/broadcast_helper.js')();
+require('../helpers/data_helper.js')();
+var loremIpsum = require('lorem-ipsum')
+console.log(loremIpsum({count: 1,units: 'paragraph' }))
 
-// console.log(newMultisigAddress(2,3))
-
-
-var keypair = require('keypair');
- 
-var pair = keypair();
-console.log(pair);

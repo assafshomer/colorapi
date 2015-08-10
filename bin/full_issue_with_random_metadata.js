@@ -3,9 +3,13 @@ require('../helpers/pay_helper.js')();
 require('../helpers/address_helper.js')();
 require('../helpers/sign_helper.js')();
 require('../helpers/broadcast_helper.js')();
+require('../helpers/data_helper.js')();
+
+var loremIpsum = require('lorem-ipsum')
 var keypair = require('keypair');
 var pair = keypair();
 var fs = require('fs');
+var util = require('util')  
 
 akp2 = newAddressKeyPair();
 new_address = akp2['address'];
@@ -32,24 +36,28 @@ var asset = {
     "divisibility": 0,
     "fee": 1000,    
     "metadata": {
-      "data": {
-        "assetId": "askjdfaksjdflasdlkfj",
-        "assetName": "some lone asset name that I just invented",        
-        "issuer": "the issuer of this asset is currently in hiding", // Name of the asset issuer
-        "description": "I have to make up some long description",
-        "urls": [{"name": 'foo',"url": 'http://wwww.gooooggggle.com', "mimeType": 'text/html', "dataHash": '123'}], // array of urlItems
+        "assetName": loremIpsum({count: 1,units: 'words' }),        
+        "issuer": loremIpsum({count: 3,units: 'words' }), // Name of the asset issuer
+        "description": loremIpsum({count: 1,units: 'sentences' }),
+        "urls": [
+            {"name": loremIpsum({count: 1,units: 'words' }),"url": 'http://'+randomString(3)+'.com', "mimeType": 'text/html', "dataHash": randomHex(64)},
+            {"name": loremIpsum({count: 1,units: 'words' }),"url": 'http://'+randomString(3)+'.com', "mimeType": 'text/html', "dataHash": randomHex(64)},
+            {"name": loremIpsum({count: 1,units: 'words' }),"url": 'http://'+randomString(3)+'.com', "mimeType": 'text/html', "dataHash": randomHex(64)}
+            ],
         "userData" : {"meta": [
-                {"key": 'bar', "value": 1234, "type": 'Number'},
-                {"key": 'buzz', "value": "xxxxxx", "type": 'String'},
-                {"key": 'quuax', "value": true, "type": 'Boolean'}
+                {"key": loremIpsum({count: 1,units: 'words' }), "value": randomInteger(5), "type": 'Number'},
+                {"key": loremIpsum({count: 1,units: 'words' }), "value": randomString(), "type": 'String'},
+                {"key": loremIpsum({count: 1,units: 'words' }), "value": true, "type": 'Boolean'}
             ]
         } 
-      }
     }
     // "encryptions": [
     //     {"key": "Name", "pubKey": pair['public'],"format":"pem","type":'pkcs1' }
     // ]
 };
+
+     
+console.log("asset: ",util.inspect(asset, {depth:10}))
 
 setTimeout(function(){
 	postToApi('issue',asset,function(err, body, file){
