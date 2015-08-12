@@ -7,13 +7,13 @@ var fs = require('fs');
 module.exports = function(){
 	
 	this.newAddress = function newAddress(){
-		key = bitcoin.ECKey.makeRandom();
-		wif = key.toWIF();
-		address = key.pub.getAddress(bitcoin.networks.testnet).toString();
+		var key = bitcoin.ECKey.makeRandom();
+		var wif = key.toWIF();
+		var address = key.pub.getAddress(bitcoin.networks.testnet).toString();
 		// console.log('new TESTNET address: ['+address+']');
 		// console.log('key: ['+wif+']');
 
-		body=address+','+wif;
+		var body=address+','+wif;
 
 		fs.appendFile('../data/private_keys.csv', body+'\n', function(err) {
 		    if(err) {
@@ -25,13 +25,13 @@ module.exports = function(){
 	};
 
 	this.newAddressKeyPair = function newAddressKeyPair(){
-		key = bitcoin.ECKey.makeRandom();
-		wif = key.toWIF();
-		address = key.pub.getAddress(bitcoin.networks.testnet).toString();
+		var key = bitcoin.ECKey.makeRandom();
+		var wif = key.toWIF();
+		var address = key.pub.getAddress(bitcoin.networks.testnet).toString();
 		// console.log('new TESTNET address: ['+address+']');
 		// console.log('key: ['+wif+']');
 
-		body=address+','+wif;
+		var body=address+','+wif;
 
 		fs.appendFile('../data/private_keys.csv', body+'\n', function(err) {
 		    if(err) {
@@ -66,4 +66,5 @@ module.exports = function(){
 
 	this.address = 'n2t19a46cBs2DdHs2sqfRwPGhoQjvqmefR';
 	this.priv = 'KzH9zdXm95Xv3z7oNxzM6HqSPUiQbuyKoFdQBTf3HKx1B6eYdbAn';	
+	this.new_address = newAddress();
 }

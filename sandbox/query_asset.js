@@ -8,8 +8,8 @@ require('../helpers/api_helper.js')();
 // txid='98dc807cb73ed849b00dd2f3613ff82270759674e3d38ab6170fbab8e42bcc5e'
 // index = '3'
 
-assetid = 'LEYSPuPCH9nbKdKarB2teTifvXqK4q372WB8q'
-txid='c22315cecdcea2762d15fbdff506cb22b3da5bf4e29ac2bf781e2ff0635b2b35'
+assetid = 'LKGB7pAL7hW7LHAgj8y7m9pJxVHMiuXxjz4s1'
+txid='15e706a772e9c9e3eb5e975e468e3edd66a883b20a5b263e8c9149756d85d5ac'
 index = '2'
 
 // getFromApi('assetmetadata',assetid,function(err, body){

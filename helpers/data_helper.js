@@ -1,4 +1,7 @@
 module.exports = function(){ 
+    var path = require('path');
+    var scriptName = path.basename(__filename,'.js');
+    var log_file_name = scriptName+'_'+Date.now()+'.json';    
 
     this.randomHex = function randomHex(length){
     	var init = Array(length).join("x");
@@ -51,5 +54,9 @@ module.exports = function(){
             text += possible.charAt(Math.floor(Math.random() * possible.length));
 
         return text;
+    }
+
+    this.logFileName = function logFileName(filename){
+        return path.basename(__filename,'.js')+'_'+Date.now()+'.json'; ;
     }
 }
