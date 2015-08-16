@@ -16,8 +16,8 @@ function getFromApi(api_endpoint, param, callback) {
 	});
 };
 
-assetid = 'LCNeqPsxVSXZEZa6gm84s9pj885FTb27nEfJB';
-txid='f36bb85d9f9819620c7eb0efe3af8ce8cdf1e5317cac96afd806fecfcae08acd';
+assetid = 'LFz41uCdFzCFwMfYHEpjDQLc9Erpk6dhE7VGW';
+txid='b48b266f8da4b3a97a3680da0dd584fd82d6d1cc0c8aa199aa1be7c888b4ff66';
 index = '2';
 
 getFromApi('assetmetadata',assetid+'/'+txid+':'+index,function(err, body){

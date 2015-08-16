@@ -8,7 +8,8 @@ module.exports = function(){
 	  return 'https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='+string;	
 	}
 
-	this.qrString = function qrString(string){
+	this.showQR = function showQR(string){
+		console.log(string);
 		open(qrUrl(string));
 	}
 
