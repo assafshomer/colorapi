@@ -1,3 +1,2 @@
-require('../helpers/qr_helper.js')();
+require('../helpers/addresses_helper.js')();
 
-showQR('foo')
